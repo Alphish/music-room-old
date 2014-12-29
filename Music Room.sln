@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music Room", "Music Room\Music Room.csproj", "{471E2640-B96B-4F4D-92A2-75C40BC33C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analysis", "WaveAnalysis\Analysis.csproj", "{46B38F14-1442-469D-BD2E-213C2FB6819E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streaming", "Streaming\Streaming.csproj", "{7285D3A4-1698-42F7-B470-A97A206F0E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metadata", "Metadata\Metadata.csproj", "{23E7B6BC-0DC5-4E03-9B63-BF0EF7404ABA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{471E2640-B96B-4F4D-92A2-75C40BC33C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471E2640-B96B-4F4D-92A2-75C40BC33C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{471E2640-B96B-4F4D-92A2-75C40BC33C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{471E2640-B96B-4F4D-92A2-75C40BC33C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46B38F14-1442-469D-BD2E-213C2FB6819E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B38F14-1442-469D-BD2E-213C2FB6819E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B38F14-1442-469D-BD2E-213C2FB6819E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B38F14-1442-469D-BD2E-213C2FB6819E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7285D3A4-1698-42F7-B470-A97A206F0E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7285D3A4-1698-42F7-B470-A97A206F0E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7285D3A4-1698-42F7-B470-A97A206F0E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7285D3A4-1698-42F7-B470-A97A206F0E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E7B6BC-0DC5-4E03-9B63-BF0EF7404ABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E7B6BC-0DC5-4E03-9B63-BF0EF7404ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E7B6BC-0DC5-4E03-9B63-BF0EF7404ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E7B6BC-0DC5-4E03-9B63-BF0EF7404ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

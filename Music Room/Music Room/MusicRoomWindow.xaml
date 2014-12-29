@@ -1,0 +1,80 @@
+﻿<Window x:Class="Music_Room_Application.Music_Room.MusicRoomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Music Room" Height="350" Width="525">
+    <!-- COMMANDS -->
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open"
+                  Executed="Command_Open"/>
+        <CommandBinding Command="ApplicationCommands.New"
+                  Executed="Command_New"/>
+        <CommandBinding Command="ApplicationCommands.Save"
+                  Executed="Command_Save"/>
+    </Window.CommandBindings>
+    <!-- ACTUAL LAYOUT-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!-- PLAYER MENU -->
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="File">
+                <MenuItem Header="Add track" Click="AddTrack_Click"/>
+                <!-- TO DO: include adding directories through dialog <MenuItem Header="Add directory" Click="AddDirectory_Click"/>-->
+                <MenuItem Header="Add playlist" Click="AddPlaylist_Click"/>
+                <Separator/>
+                <MenuItem Header="New playlist" Command="ApplicationCommands.New"/>
+                <MenuItem Header="Load playlist" Command="ApplicationCommands.Open"/>
+                <MenuItem Header="Save playlist" Command="ApplicationCommands.Save"/>
+                <MenuItem Header="Save as" Click="Command_SavePlaylistAs"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="ShowAbout"/>
+            </MenuItem>
+        </Menu>
+        <!-- PLAYLIST SECTION -->
+        <DataGrid Name="PlaylistGrid" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Playlist.Data}" AutoGenerateColumns="False"
+                  AllowDrop="True" PreviewDragEnter="Playlist_PreviewDragEnter" PreviewDragOver="Playlist_PreviewDragEnter"
+                  PreviewDrop="Playlist_PreviewDrop" IsReadOnly="True" SelectionUnit="FullRow" Margin="4">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasLoop}" Value="False">
+                            <Setter Property="Background" Value="Salmon"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding HasLoop}" Value="True">
+                            <Setter Property="Background" Value="LightSkyBlue"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Click="UndetectedSearch_Click" Margin="4">Find for undetected</Button>
+            <Button Grid.Column="1" Click="CompleteSearch_Click" Margin="4">Find for all</Button>
+        </Grid>
+        <!-- PLAYED TRACK SECTION -->
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+            <StackPanel Margin="4">
+                <TextBlock Text="{Binding Player.Track.Album}"/>
+                <TextBlock Text="{Binding Player.Track.Title}"/>
+                <ProgressBar IsIndeterminate="{Binding Path=Player.LoadingProcess.IsIndeterminate, Mode=OneWay}"
+                                     Value="{Binding Path=Player.LoadingProcess.CompletionPercentage, Mode=OneWay}"
+                                     Foreground="{Binding Path=Player.LoadingProcess.FrontBrush, Mode=OneWay}"
+                                     Background="{Binding Path=Player.LoadingProcess.BackBrush, Mode=OneWay}"
+                                     Height="8"/>
+                <Button HorizontalAlignment="Center" Margin="2" Click="StopTrack_Click">Stop</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
