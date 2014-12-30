@@ -320,7 +320,7 @@ namespace Music_Room_Application.Music_Room
         //event handler for showing "About" window
         private void ShowAbout(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Music Room, version 0.2.3\nReleased at 29.12.2014\n\nLibraries used:\nNAudio: http://naudio.codeplex.com\nNVorbis: https://www.nuget.org/packages/NVorbis/");
+            MessageBox.Show("Music Room, version 0.2.4\nReleased at 30.12.2014\n\nLibraries used:\nNAudio: http://naudio.codeplex.com\nNVorbis: https://www.nuget.org/packages/NVorbis/");
         }
     }
 }

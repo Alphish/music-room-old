@@ -98,7 +98,14 @@
                     </StackPanel>
                     <TextBox Grid.Row="1" Margin="4" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
                              Text="{Binding OutputText}" Grid.ColumnSpan="3"/>
-                    <Button Grid.Row="2" Margin="4" Click="AbortProcess_Click" Grid.ColumnSpan="3">Stop all</Button>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="4" Grid.Column="0" Click="SkipProcess_Click">Skip current</Button>
+                        <Button Margin="4" Grid.Column="1" Click="AbortProcess_Click">Stop all</Button>
+                    </Grid>
                 </Grid>
             </GroupBox>
         </Grid>

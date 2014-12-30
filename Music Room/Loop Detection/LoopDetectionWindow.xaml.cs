@@ -134,6 +134,13 @@ namespace Music_Room_Application.Loop_Detection
             Context.Player.Stop();
         }
 
+        //event handler for skipping currently processed track
+        //might be useful for files that refuse to be processed for one reason or another
+        private void SkipProcess_Click(object sender, RoutedEventArgs e)
+        {
+            Context.SkipCurrent();
+        }
+
         //event handler for moving a track 3 seconds before looping point, for diagnostic purpose
         private void SeekTrack_Click(object sender, RoutedEventArgs e)
         {
