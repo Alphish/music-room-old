@@ -19,6 +19,7 @@ namespace Alphicsh.Audio.Analysis
         public WaveFormat Format { get; private set; }
 
         private BinaryReader InnerReader;
+        private Func<BinaryReader, Int16> SampleGetter;
         private Int32 Channels;
 
         /// <summary>
@@ -33,8 +34,10 @@ namespace Alphicsh.Audio.Analysis
 
             stream.Position = 0;
             this.InnerReader = new BinaryReader(stream);
+            this.SampleGetter = this.CreateSampleGetter();
             this.Channels = stream.WaveFormat.Channels;
-            this.Target = stream.Length/2;
+
+            this.Target = stream.Length / (Format.BitsPerSample / 8);
 
             this.Result = new Int16[Channels][];
             for (var i = 0; i < Channels; i++)
@@ -52,7 +55,7 @@ namespace Alphicsh.Audio.Analysis
 
             for (var i = intProgress; i < intProgress + toLoad; i += 1)
             {
-                Result[i % Channels][i / Channels] = InnerReader.ReadInt16();
+                Result[i % Channels][i / Channels] = SampleGetter(InnerReader);
             }
             this.Progress += toLoad;
 
@@ -60,6 +63,32 @@ namespace Alphicsh.Audio.Analysis
             {
                 InnerReader.Dispose();
                 this.Complete();
+            }
+        }
+
+        //creates sample getter depending on wave format, so that it's always represented as short integer
+        protected Func<BinaryReader, Int16> CreateSampleGetter()
+        {
+            switch (Format.Encoding)
+            {
+                case WaveFormatEncoding.Pcm:
+                    switch (Format.BitsPerSample)
+                    {
+                        case 8: return (reader) => reader.ReadByte();
+                        case 16: return (reader) => reader.ReadInt16();
+                        case 32: return (reader) => (Int16)(reader.ReadInt32() >> 16);
+                        case 64: return (reader) => (Int16)(reader.ReadInt64() >> 48);
+                        default: throw new NotSupportedException("Cannot handle Pcm encoding with " + Format.BitsPerSample + " bits per sample.");
+                    }
+                case WaveFormatEncoding.IeeeFloat:
+                    switch (Format.BitsPerSample)
+                    {
+                        case 32: return (reader) => Convert.ToInt16(Int16.MaxValue * reader.ReadSingle());
+                        case 64: return (reader) => Convert.ToInt16(Int16.MaxValue * reader.ReadDouble());
+                        default: throw new NotSupportedException("Cannot handle IeeeFloat encoding with " + Format.BitsPerSample + " bits per sample.");
+                    }
+                default:
+                    throw new NotSupportedException("Cannot handle wave format encoding " + Format.Encoding + ".");
             }
         }
     }

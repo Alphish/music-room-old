@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using NAudio.Wave;
+using NVorbis.NAudioSupport;
 
 namespace Alphicsh.Audio.Streaming
 {
@@ -24,10 +25,12 @@ namespace Alphicsh.Audio.Streaming
             var ext = Path.GetExtension(filename);
             switch (ext)
             {
-                case ".wav":
-                    return new WaveFileReader(filename);
                 case ".mp3":
                     return new Mp3FileReader(filename);
+                case ".ogg":
+                    return new VorbisWaveReader(filename);
+                case ".wav":
+                    return new WaveFileReader(filename);
                 default:
                     throw new NotSupportedException("Cannot read " + ext + " files.");
             }

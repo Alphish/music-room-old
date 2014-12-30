@@ -55,7 +55,9 @@ namespace Alphicsh.Audio.Analysis.LoopDetection
         /// <returns>An initial fragment of the loop detection pipeline.</returns>
         private static ProcessPipelineBuilder<ITrackingExtendedProcess, SamplesReader> ReadSamples(String path, IDictionary<String, Object> parameters)
         {
-            return ProcessPipelineBuilding.Init<ITrackingExtendedProcess, SamplesReader>(() => new SamplesReader(WaveStreamFactory.Create(path)));
+            return ProcessPipelineBuilding
+                .Init<ITrackingExtendedProcess, MemoryWaveStreamBuilder>(() => new MemoryWaveStreamBuilder(path))
+                .Pipe((previous) => new SamplesReader(previous.Result));
         }
 
         /// <summary>

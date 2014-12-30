@@ -68,7 +68,7 @@ namespace Music_Room_Application
         public void AddTrack(String path)
         {
             //skipping not supported formats
-            if (!path.EndsWith(".mp3") && !path.EndsWith(".wav")) return;
+            if (!path.EndsWith(".mp3") && !path.EndsWith(".wav") && !path.EndsWith(".ogg")) return;
 
             this.AddTrack(new TrackInfo(path));
         }
