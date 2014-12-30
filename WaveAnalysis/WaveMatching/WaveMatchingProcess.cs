@@ -28,7 +28,7 @@ namespace Alphicsh.Audio.Analysis.WaveMatching
         /// </summary>
         public Int32 ScoreCap
         {
-            get { return Query.ReferencePoints.Count() * Query.MatchLength * (Query.StrictScore + Query.LooseScore) * Query.Matchers.Count(); }
+            get { return Query.ReferencePoints.Count() * Query.MatchLength * (Query.StrictScore + Query.LooseScore) * Query.Matchers.Count() * Query.Echoes.Count; }
         }
 
         /// <summary>
@@ -73,7 +73,13 @@ namespace Alphicsh.Audio.Analysis.WaveMatching
             for (var i = 0; i < this.StepSize; i++)
             {
                 var candidate = Query.LoopOffsets[Current++];
-                Results[candidate] = Query.Matchers.Sum(matcher => Query.ReferencePoints.Sum((Int32 point) => matcher.CompareWaves(point, candidate, Query.MatchLength, Query.StrictScore, Query.LooseScore)));
+                Results[candidate] = Query.Echoes.Sum(multiplier => 
+                    Query.Matchers.Sum(matcher =>
+                        Query.ReferencePoints.Sum((Int32 point) =>
+                            matcher.CompareWaves(point, multiplier * candidate, Query.MatchLength, Query.StrictScore, Query.LooseScore)
+                            )
+                        )
+                    );
 
                 if (Current >= Query.LoopOffsets.Count)
                 {

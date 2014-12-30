@@ -189,7 +189,7 @@ namespace Music_Room_Application.Loop_Detection
             //TO DO: make methods readable from configuration file
             this.LoopDetectionMethods = new ObservableCollection<LoopDetectionSpecificMethod>();
 
-            //two loops family
+            //two loops (front) family
             this.LoopDetectionMethods.Add(new LoopDetectionSpecificMethod("Two loops",
                 SysaldisLoopDetection.BasicSysaldis, new Dictionary<String, Object>()
                 {
@@ -215,6 +215,18 @@ namespace Music_Room_Application.Loop_Detection
                     { "refEnd", 0.3 },
                     { "offMin", 0.33 },
                     { "offMax", 0.5 },
+                    { "matches", "3x147 4x441 5x1323" }
+                }));
+
+            //two loops (backtrack) family
+            this.LoopDetectionMethods.Add(new LoopDetectionSpecificMethod("Echoed backtrack",
+                SysaldisLoopDetection.EchoedBacktrack, new Dictionary<String, Object>()
+                {
+                    { "matches", "2x49 3x147 4x441 5x1323" }
+                }));
+            this.LoopDetectionMethods.Add(new LoopDetectionSpecificMethod("Echoed backtrack (long)",
+                SysaldisLoopDetection.EchoedBacktrack, new Dictionary<String, Object>()
+                {
                     { "matches", "3x147 4x441 5x1323" }
                 }));
 

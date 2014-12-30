@@ -31,6 +31,11 @@ namespace Alphicsh.Audio.Analysis.WaveMatching
         public IList<Int32> LoopOffsets { get; private set; }
 
         /// <summary>
+        /// Loop offsets multipliers.
+        /// </summary>
+        public List<Int32> Echoes { get; set; }
+
+        /// <summary>
         /// The score added for strictly fitting in a matcher's area.
         /// </summary>
         public Int32 StrictScore { get; protected set; }
@@ -52,6 +57,8 @@ namespace Alphicsh.Audio.Analysis.WaveMatching
 
             this.StrictScore = strictScore;
             this.LooseScore = looseScore;
+
+            this.Echoes = new List<Int32> { 1 };
         }
 
         //and it doesn't seem to be much different in that regard, either
@@ -67,6 +74,8 @@ namespace Alphicsh.Audio.Analysis.WaveMatching
 
             this.StrictScore = strictScore;
             this.LooseScore = looseScore;
+
+            this.Echoes = new List<Int32> {1};
         }
         //perhaps I shouldn't put it all in a constructor? Hmm...
 

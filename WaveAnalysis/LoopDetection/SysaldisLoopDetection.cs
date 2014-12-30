@@ -292,5 +292,48 @@ namespace Alphicsh.Audio.Analysis.LoopDetection
         }
 
         #endregion
+
+        #region Echoed Backtrack
+
+        /// <summary>
+        /// Passes the backtracking Sysaldis algorithm for single loops.
+        /// </summary>
+        public static SysaldisLoopDetection EchoedBacktrack
+        {
+            get
+            {
+                if (_EchoedBacktrack == null)
+                {
+                    _EchoedBacktrack = new SysaldisLoopDetection("EchoedBacktrack", (path, parameters) => TackSysaldis(CreateEchoedBacktrackQueries(path, parameters)));
+                }
+                return _EchoedBacktrack;
+            }
+        }
+        private static SysaldisLoopDetection _EchoedBacktrack;
+
+        //creates backtracking loop queries, based on samples received
+        private static ProcessPipelineBuilder<ITrackingExtendedProcess, QueryPlanner> CreateEchoedBacktrackQueries(String path, IDictionary<String, Object> parameters)
+        {
+            Func<SamplesTrimmer, QueryPlanner> f = (previous) =>
+            {
+                var refStart = previous.Result[0].Length - 8 * previous.Format.SampleRate;
+                var planner = _CreateQueries(previous,
+                    refStart, refStart + 5 * previous.Format.SampleRate,
+                    -refStart / 2, -5 * previous.Format.SampleRate,
+                    parameters["matches"].ToString().Split(new String[] { " " }, StringSplitOptions.RemoveEmptyEntries)
+                    );
+                    
+                foreach (var query in planner.Queries)
+                {
+                    query.Echoes = new List<Int32>() {1, 2};
+                }
+
+                return planner;
+            };
+            return ReadAndTrimSamples(path, parameters).Pipe(f);
+        }
+
+        #endregion
+
     }
 }
