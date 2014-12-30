@@ -123,7 +123,7 @@ namespace Music_Room_Application.Music_Room
         {
             ExecuteFileDialog(
                 () => { var result = new OpenFileDialog(); result.Multiselect = true; return result; },
-                "MP3 audio (*.mp3)|*.mp3|Microsoft Wave (*.wav)|*.wav",
+                "MP3 audio (*.mp3)|*.mp3|OGG Vorbis (*.ogg)|*.ogg|Microsoft Wave (*.wav)|*.wav",
                 ".mp3",
                 (paths) => { Context.Playlist.AddTracks(paths); }
                 );
