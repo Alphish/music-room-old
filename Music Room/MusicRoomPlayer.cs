@@ -118,7 +118,7 @@ namespace Music_Room_Application
         {
             if (this.PlayedStream != null)
             {
-                this.PlayedStream.Position = PlayedStream.LoopEnd - PlayedStream.WaveFormat.SampleRate * 3;
+                this.PlayedStream.Position = PlayedStream.LoopEnd - PlayedStream.WaveFormat.AverageBytesPerSecond * 3;
             }
         }
     }
