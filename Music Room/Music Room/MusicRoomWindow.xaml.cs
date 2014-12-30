@@ -84,6 +84,19 @@ namespace Music_Room_Application.Music_Room
             }
         }
 
+        //event handler for additional playlist keyboard operations
+        private void Playlist_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && PlaylistGrid.SelectedItems.Count == 1)
+            {
+                this.PlaylistEntry_DoubleClick(PlaylistGrid.SelectedItem, new RoutedEventArgs());
+            }
+            if (e.Key == Key.Delete)
+            {
+                Context.Playlist.RemoveTracks(PlaylistGrid.SelectedItems.Cast<TrackInfo>().ToList());
+            }
+        }
+
         //handling events for playlist tracks manipulation (adding tracks, making new playlist etc.)
 
         #region Playlist manipulation
@@ -307,7 +320,7 @@ namespace Music_Room_Application.Music_Room
         //event handler for showing "About" window
         private void ShowAbout(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Music Room, version 0.2.2\nReleased at 28.12.2014\n\nMade using NAudio: http://naudio.codeplex.com");
+            MessageBox.Show("Music Room, version 0.2.3\nReleased at 29.12.2014\n\nLibraries used:\nNAudio: http://naudio.codeplex.com\nNVorbis: https://www.nuget.org/packages/NVorbis/");
         }
     }
 }

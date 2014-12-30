@@ -41,7 +41,8 @@
         <!-- PLAYLIST SECTION -->
         <DataGrid Name="PlaylistGrid" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Playlist.Data}" AutoGenerateColumns="False"
                   AllowDrop="True" PreviewDragEnter="Playlist_PreviewDragEnter" PreviewDragOver="Playlist_PreviewDragEnter"
-                  PreviewDrop="Playlist_PreviewDrop" IsReadOnly="True" SelectionUnit="FullRow" Margin="4">
+                  PreviewDrop="Playlist_PreviewDrop" IsReadOnly="True" SelectionUnit="FullRow" Margin="4"
+                  PreviewKeyDown="Playlist_PreviewKeyDown">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>

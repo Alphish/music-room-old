@@ -113,6 +113,27 @@ namespace Music_Room_Application
         }
 
         /// <summary>
+        /// Remove a track from playlist.
+        /// </summary>
+        /// <param name="track">The track to remove.</param>
+        public void RemoveTrack(TrackInfo track)
+        {
+            this.Data.Remove(track);
+        }
+
+        /// <summary>
+        /// Removes given tracks from playlist.
+        /// </summary>
+        /// <param name="tracks">The tracks to remove.</param>
+        public void RemoveTracks(IEnumerable<TrackInfo> tracks)
+        {
+            foreach (var track in tracks)
+            {
+                this.RemoveTrack(track);
+            }
+        }
+
+        /// <summary>
         /// Adds a directory with soundtracks.
         /// </summary>
         /// <param name="path">The path of the directory.</param>
